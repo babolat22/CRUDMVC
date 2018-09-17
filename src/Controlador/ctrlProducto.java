@@ -37,10 +37,11 @@ public class ctrlProducto implements ActionListener {
      public void iniciar(){
          frm.setTitle("Formulario Productos");
          frm.setLocationRelativeTo(frm);
-         frm.txtID.setVisible(false);
+         frm.txtID.setVisible(true);
         
      }
      
+     // ARMA LA ENTIDAD Y DA LA ORDEN DE PERSISTENCIA A LA CLASE CONSULTA
     @Override
      public void actionPerformed(ActionEvent e){
          //SI OPRIME GUARDAR
@@ -60,13 +61,14 @@ public class ctrlProducto implements ActionListener {
          }
          //SI OPRIME MODIFICAR
             if(e.getSource()==frm.btnModifica){
+             frm.txtID.setVisible(true);
              mod.setId(Integer.parseInt(frm.txtID.getText()));
             //tomamos lo que viene de la vista y lo mandamos al modelo
              mod.setCodigo(frm.txtCodigo.getText());
              mod.setNombre(frm.txtNombre.getText());
              mod.setPrecio(Double.parseDouble(frm.txtPrecio.getText()));
              mod.setCantidad(Integer.parseInt(frm.txtCantidad.getText()));
-                   // en registrar de la consulta es true o false
+                   // en MODIFICAR de la consulta es true o false
              if(modc.modificar(mod))
                  JOptionPane.showMessageDialog(null, "Registro Modificado!");
              else
@@ -95,12 +97,8 @@ public class ctrlProducto implements ActionListener {
                 //SI OPRIME buscar
         if(e.getSource()==frm.btnBusca){
              mod.setCodigo(frm.txtCodigo.getText());  // codigo
-            //tomamos lo que viene de la vista y lo mandamos al modelo
-             //mod.setCodigo(frm.txtCodigo.getText());
-             //mod.setNombre(frm.txtNombre.getText());
-             //mod.setPrecio(Double.parseDouble(frm.txtPrecio.getText()));
-            // mod.setCantidad(Integer.parseInt(frm.txtCantidad.getText()));
-                   // en registrar de la consulta es true o false
+            
+             // en BUSCAR de la consulta es true o false
              if(modc.buscar(mod)){
                  
                  //USAR String.valueOf PARA EL PARSEO  !!!
