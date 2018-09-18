@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *ESTA CLASE HACE LA PRESISTENCIA EN LA BASE DE DATOS CON UNA ENTIDAD que es parametro
  */
 package Modelo;
 
@@ -17,7 +15,7 @@ import java.sql.SQLException;
 public class ConsultasProducto extends Conexion {
    
     public boolean registrar(Producto pro){
-        PreparedStatement ps=null;
+        PreparedStatement ps;
         Connection con = getConection();
         String sql ="INSERT INTO PRODUCTO (codigo, nombre, precio, cantidad) VALUES (?,?,?,?)";
         try{
@@ -47,7 +45,6 @@ public class ConsultasProducto extends Conexion {
     public boolean modificar(Producto pro){
         PreparedStatement ps;
         Connection con = getConection();
-        //UPDATE `producto` SET `codigo` = '2223', `nombre` = 'papas', `precio` = '24.00', `cantidad` = '2' WHERE `producto`.`id` = 1 
         String sql ="UPDATE PRODUCTO SET codigo=?, nombre=?, precio=?, cantidad=? WHERE id=?";
         try{
             ps = con.prepareStatement(sql);
@@ -108,7 +105,7 @@ public class ConsultasProducto extends Conexion {
         try{
             ps = con.prepareStatement(sql);
             ps.setString(1, pro.getCodigo());
-            rs= ps.executeQuery();
+            rs= ps.executeQuery();  // execute  query
             while (rs.next()){    //while si son varias filas
                 pro.setId(Integer.parseInt(rs.getString("id")));
                 pro.setCodigo(rs.getString("codigo"));
